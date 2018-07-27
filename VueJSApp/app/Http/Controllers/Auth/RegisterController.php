@@ -55,7 +55,7 @@ class RegisterController extends Controller
         ]);
     }
 
-    register{
+    register {
 
       $this.validator()
       $this.create();
