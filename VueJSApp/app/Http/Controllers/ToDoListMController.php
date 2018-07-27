@@ -15,7 +15,7 @@ class ToDoListMController extends Controller
     {
         $user = auth()->user();
 
-        return $user->getTasks();
+        return $user->tasks();
     }
 
     /**
@@ -23,10 +23,7 @@ class ToDoListMController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
+    public function create(){}
 
     /**
      * Store a newly created resource in storage.
@@ -61,7 +58,7 @@ class ToDoListMController extends Controller
      */
     public function show($id)
     {
-
+        return ToDo::find($id);
     }
 
     /**
@@ -70,10 +67,7 @@ class ToDoListMController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
-    }
+    public function edit($id){}
 
     /**
      * Update the specified resource in storage.
@@ -84,7 +78,14 @@ class ToDoListMController extends Controller
      */
     public function update(Request $request, $id)
     {
+        ToDo::find($id)
+                 ->update(['title' => $request->input('title'),
+                           'note' => $request->input('note'),
+                           'is_priority' => $request->input('is_priority'),
+                           'is_done' => $request->input('is_done')
+                          ]);
 
+        return ToDo::find($id);
     }
 
     /**
@@ -95,6 +96,6 @@ class ToDoListMController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return ToDo::destroy($id);
     }
 }
