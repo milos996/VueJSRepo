@@ -22,11 +22,19 @@ class ToDoListController extends Controller
 
     public function update(Request $request)
     {
-        $request->validate([
-        'title' => 'bail|required|unique:todos|max:255',
-        '' => '',
+        $validatedData = $request->validate([
+            'title' => 'bail|required|string|max:255',
+            'note' => 'bail|required|string',
+            'is_priority' => 'bail|required|boolean',
+            'is_done' => 'bail|required|boolean',
         ]);
 
+        $todo =  ToDo::create([
+            'title' => $request->input('title'),
+            'note' => $request->input('note'),
+            'is_priority' => $request->input('is_priority'),
+            'is_done' => $request->input('is_done'),
+        ])
     }
 
     public function destroy()
