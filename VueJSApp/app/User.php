@@ -37,4 +37,15 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+    /**
+     * Get all tasks associated with user
+     */
+    public function getTasks()
+    {
+        $user_todos = DB:table('todos')
+                                  ->where('user_id', $this->id)
+                                  ->get();
+
+        return $user_todos;
+    }
 }
