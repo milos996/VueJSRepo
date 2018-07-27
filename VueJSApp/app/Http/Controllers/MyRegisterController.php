@@ -22,8 +22,8 @@ class MyRegisterController extends Controller
             'password' => bcrypt($request->input('password')),
         ]);
 
-        //$token = auth()->login($user);
-        return $user;
+        $token = auth()->login($user);
+        return $this->respondWithToken($token);
     }
 
     /**
