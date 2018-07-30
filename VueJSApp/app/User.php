@@ -18,7 +18,6 @@ class User extends Authenticatable implements JWTSubject
     protected $fillable = [
         'name', 'email', 'password',
     ];
-
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -37,15 +36,9 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
-    /**
-     * Get all tasks associated with user
-     */
-    public function getTasks()
-    {
-        $user_todos = DB:table('todos')
-                                  ->where('user_id', $this->id)
-                                  ->get();
 
-        return $user_todos;
-    }
+     public function tasks()
+     {
+        return $this->hasMany(User::class);
+     }
 }
