@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\ToDo;
+use App\User;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ToDoListMController extends Controller
 {
@@ -13,9 +17,9 @@ class ToDoListMController extends Controller
      */
     public function index()
     {
-        $user = auth()->user();
+        $user = Auth::user();
 
-        return $user->tasks();
+        return $user->tasks;
     }
 
     /**
@@ -36,16 +40,17 @@ class ToDoListMController extends Controller
         $validatedData = $request->validate([
             'title' => 'bail|required|string|max:255',
             'note' => 'bail|required|string',
-            'is_priority' => 'bail|required|boolean',
-            'is_done' => 'bail|required|boolean',
+            'is_priority' => 'bail|boolean',
+            'is_done' => 'bail|boolean',
         ]);
-
+       
+        $user = Auth::user()->id;
         $todo =  ToDo::create([
             'title' => $request->input('title'),
             'note' => $request->input('note'),
             'is_priority' => $request->input('is_priority'),
             'is_done' => $request->input('is_done'),
-            'user_id' => auth()->user()->id;
+            'user_id' => $user
         ]);
 
     }

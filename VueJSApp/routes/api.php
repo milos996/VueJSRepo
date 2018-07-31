@@ -26,7 +26,9 @@ Route::group([
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
     Route::post('register', 'MyRegisterController@store');
-    Route::resource('todos', 'ToDoListController',
-                    ['only' => ['index', 'show', 'update', 'destroy']]);
+    
 
 });
+
+Route::resource('todos', 'ToDoListMController')->middleware('api');
+                    

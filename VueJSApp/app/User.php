@@ -5,6 +5,7 @@ namespace App;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\ToDo;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -39,6 +40,6 @@ class User extends Authenticatable implements JWTSubject
 
      public function tasks()
      {
-        return $this->hasMany(User::class);
+        return $this->hasMany(ToDo::class);
      }
 }

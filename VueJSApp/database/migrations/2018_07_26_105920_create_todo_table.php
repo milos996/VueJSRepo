@@ -19,6 +19,7 @@ class CreateTodoTable extends Migration
             $table->text('note');
             $table->boolean('is_priority');
             $table->boolean('is_done');
+            $table->unsignedInteger('user_id');
             $table->timestamps();
         });
     }

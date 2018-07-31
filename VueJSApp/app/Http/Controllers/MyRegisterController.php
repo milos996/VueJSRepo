@@ -11,6 +11,8 @@ class MyRegisterController extends Controller
 
     public function store(Request $request)
     {
+
+        \Log::info($request->input('password'));
         $validatedData = $request->validate([
               'name' => 'bail|required|string|max:255',
               'email' => 'required|email|max:255|unique:users',
@@ -22,7 +24,7 @@ class MyRegisterController extends Controller
             'password' => bcrypt($request->input('password')),
         ]);
 
-        $token = auth()->login($user);
+        $token = Auth::login($user);
         return $this->respondWithToken($token);
     }
 
@@ -38,7 +40,7 @@ class MyRegisterController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
+            'expires_in' => Auth::factory()->getTTL() * 60
         ]);
     }
 
