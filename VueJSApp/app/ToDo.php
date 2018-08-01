@@ -8,9 +8,7 @@ use App\User;
 class ToDo extends Model
 {
     protected $table = 'todos';
-    protected $fillable = [
-        'title', 'note', 'is_priority', 'is_done','user_id',
-    ];
+    protected $fillable = ['title', 'note', 'is_priority', 'is_done','user_id'];
 
     public function user()
     {

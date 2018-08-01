@@ -18,7 +18,6 @@ class ToDoListMController extends Controller
     public function index()
     {
         $user = Auth::user();
-
         return $user->tasks;
     }
 
@@ -38,21 +37,20 @@ class ToDoListMController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'title' => 'bail|required|string|max:255',
-            'note' => 'bail|required|string',
-            'is_priority' => 'bail|boolean',
-            'is_done' => 'bail|boolean',
-        ]);
-       
+                                       'title' => 'bail|required|string|max:255',
+                                       'note' => 'bail|required|string',
+                                       'is_priority' => 'bail|boolean',
+                                       'is_done' => 'bail|boolean',
+                                   ]);
         $user = Auth::user()->id;
         $todo =  ToDo::create([
-            'title' => $request->input('title'),
-            'note' => $request->input('note'),
-            'is_priority' => $request->input('is_priority'),
-            'is_done' => $request->input('is_done'),
-            'user_id' => $user
-        ]);
-
+                          'title' => $request->input('title'),
+                          'note' => $request->input('note'),
+                          'is_priority' => $request->input('is_priority'),
+                          'is_done' => $request->input('is_done'),
+                          'user_id' => $user
+                       ]);
+        return $todo->id;
     }
 
     /**
@@ -72,6 +70,7 @@ class ToDoListMController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function edit($id){}
 
     /**
@@ -84,12 +83,12 @@ class ToDoListMController extends Controller
     public function update(Request $request, $id)
     {
         ToDo::find($id)
-                 ->update(['title' => $request->input('title'),
-                           'note' => $request->input('note'),
-                           'is_priority' => $request->input('is_priority'),
-                           'is_done' => $request->input('is_done')
-                          ]);
-
+                 ->update([
+                     'title' => $request->input('title'),
+                     'note' => $request->input('note'),
+                     'is_priority' => $request->input('is_priority'),
+                     'is_done' => $request->input('is_done')
+                 ]);
         return ToDo::find($id);
     }
 

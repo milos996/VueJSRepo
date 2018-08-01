@@ -55,13 +55,6 @@ class RegisterController extends Controller
         ]);
     }
 
-    register {
-
-      $this.validator()
-      $this.create();
-
-    }
-
     /**
      * Create a new user instance after a valid registration.
      *
